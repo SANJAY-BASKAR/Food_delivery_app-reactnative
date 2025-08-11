@@ -25,7 +25,7 @@ const SignUp = () => {
             });
             // call appwrite sign in function
             Alert.alert('Success', 'User Signed up Successfully');
-            router.replace('/');
+            router.replace('/(tabs)');
         } catch (error) {
             Alert.alert('Error', error.message);
         } finally {

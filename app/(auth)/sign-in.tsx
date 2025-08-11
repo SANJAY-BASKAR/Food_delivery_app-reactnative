@@ -1,12 +1,12 @@
-import {View, Text, Button, Alert} from 'react-native'
-import React, {useState} from 'react'
-import {Link, router, Slot} from "expo-router";
-import CustomInput from "@/components/CustomInput";
 import CustomButton from "@/components/CustomButton";
+import CustomInput from "@/components/CustomInput";
+import { Link, router } from "expo-router";
+import React, { useState } from 'react';
+import { Alert, Text, View } from 'react-native';
 
 const SignIn = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [form, setForm] = useState({email: '', password: ''});
+    const [form, setForm] = useState({ email: '', password: '' });
 
     const submit = async () => {
         if (!form.email || !form.password) return Alert.alert('Error', 'Please enter a valid email or password');
@@ -15,7 +15,7 @@ const SignIn = () => {
         try {
             // call appwrite sign in function
             Alert.alert('Success', 'User Signed in Successfully');
-            router.replace('/');
+            router.replace('/(tabs)');
         } catch (error) {
             Alert.alert('Error', error.message);
         } finally {
@@ -28,7 +28,7 @@ const SignIn = () => {
             <CustomInput
                 placeholder="Enter your Email"
                 value={form.email}
-                onChangeText={(text) => setForm((prev)=> ({
+                onChangeText={(text) => setForm((prev) => ({
                     ...prev,
                     email: text
                 }))}
@@ -38,7 +38,7 @@ const SignIn = () => {
             <CustomInput
                 placeholder="Enter your Password"
                 value={form.password}
-                onChangeText={(text) => setForm((prev)=> ({
+                onChangeText={(text) => setForm((prev) => ({
                     ...prev,
                     password: text
                 }))}
