@@ -1,10 +1,13 @@
 import CustomButton from "@/components/CustomButton";
 import CustomInput from "@/components/CustomInput";
+import useAuthStore from "@/store/auth.store";
 import { Link, router } from "expo-router";
 import React, { useState } from 'react';
 import { Alert, Text, View } from 'react-native';
 
 const SignIn = () => {
+    const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
+
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [form, setForm] = useState({ email: '', password: '' });
 
@@ -14,6 +17,7 @@ const SignIn = () => {
 
         try {
             // call appwrite sign in function
+            setIsAuthenticated(true); // ✅ Add this line
             Alert.alert('Success', 'User Signed in Successfully');
             router.replace('/(tabs)');
         } catch (error) {

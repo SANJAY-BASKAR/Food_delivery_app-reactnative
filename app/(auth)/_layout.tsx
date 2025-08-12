@@ -6,8 +6,7 @@ import { Dimensions, Image, ImageBackground, KeyboardAvoidingView, Platform, Scr
 
 
 const AuthLayout = () => {
-    const isAuthenticated = useAuthStore();
-
+    const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
     if (isAuthenticated) return <Redirect href="/(tabs)" />
 
     return (
@@ -24,3 +23,5 @@ const AuthLayout = () => {
         </KeyboardAvoidingView>
     )
 }
+
+export default AuthLayout;
