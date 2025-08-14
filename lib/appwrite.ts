@@ -109,3 +109,13 @@ export const getCategories = async () => {
         throw new Error(errorMessage);
     }
 }
+
+export const logout = async () => {
+    try {
+        await account.deleteSessions();
+        return true;
+    } catch (e) {
+        const errorMessage = e instanceof Error ? e.message : String(e);
+        throw new Error(errorMessage);
+    }
+}
