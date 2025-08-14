@@ -2,6 +2,10 @@
 module.exports = {
   content: ["./app/**/*.{js,jsx,ts,tsx}", "./components/**/*.{js,jsx,ts,tsx}"],
   presets: [require("nativewind/preset")],
+  // Add build compatibility options
+  corePlugins: {
+    preflight: false,
+  },
   theme: {
     extend: {
       colors: {
