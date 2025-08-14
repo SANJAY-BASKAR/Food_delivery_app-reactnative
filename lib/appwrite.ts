@@ -43,7 +43,8 @@ export const createUser = async ({ email, password, name }: CreateUserParams) =>
             { email, name, accountId: newAccount.$id, avatar: avatarUrl }
         );
     } catch (e) {
-        throw new Error(e.message || "Failed to create user");
+        const errorMessage = e instanceof Error ? e.message : String(e);
+        throw new Error(errorMessage || "Failed to create user");
     }
 }
 
@@ -51,7 +52,8 @@ export const signIn = async ({ email, password }: SignInParams) => {
     try {
         const session = await account.createEmailPasswordSession(email, password);
     } catch (e) {
-        throw new Error(e as string);
+        const errorMessage = e instanceof Error ? e.message : String(e);
+        throw new Error(errorMessage);
     }
 }
 
@@ -71,7 +73,8 @@ export const getCurrentUser = async () => {
 
     } catch (e) {
         console.log(e);
-        throw new Error(e as string);
+        const errorMessage = e instanceof Error ? e.message : String(e);
+        throw new Error(errorMessage);
     }
 }
 
@@ -79,7 +82,7 @@ export const getMenu = async ({ category, query, limit }: GetMenuParams) => {
     try {
         const queries: string[] = [];
 
-        if (category) queries.push(Query.equal('category', category));
+        if (category && category !== 'all') queries.push(Query.equal('categories', category));
         if (query) queries.push(Query.search('name', query));
 
         const menu = await databases.listDocuments(
@@ -100,7 +103,9 @@ export const getCategories = async () => {
             appwriteConfig.categoriesCollectionId,
 
         )
+        return categories.documents;
     } catch (e) {
-        throw new Error(e as string);
+        const errorMessage = e instanceof Error ? e.message : String(e);
+        throw new Error(errorMessage);
     }
 }
