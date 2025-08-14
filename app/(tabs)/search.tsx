@@ -8,6 +8,8 @@ import {useLocalSearchParams} from "expo-router";
 import {string} from "postcss-selector-parser";
 import CartButton from "@/components/CartButton";
 import cn from "clsx";
+import MenuCard from "@/components/MenuCard";
+import {MenuItem} from "@/type";
 
 const Search = () => {
     const {category, query} = useLocalSearchParams<{query: string; category: string}>()
@@ -36,7 +38,7 @@ const Search = () => {
 
             return (
                 <View className={cn("flex-1 max-w-[48%]", !isFirstRightColItem ? 'mt-10' : 'mt-0')}>
-                    <Text>Menu Card</Text>
+                    <MenuCard item={item as MenuItem}/>
                 </View>
             )
             }}
